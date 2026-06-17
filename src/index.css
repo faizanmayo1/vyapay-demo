@@ -1,0 +1,207 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* VyaPay — Voltage light theme (shadcn tokens, HSL channels) */
+    --background: 228 33% 97%;         /* canvas #F6F7FB */
+    --foreground: 233 43% 12%;         /* ink #11132B */
+
+    --card: 0 0% 100%;
+    --card-foreground: 233 43% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 233 43% 12%;
+
+    --primary: 242 47% 34%;            /* indigo #312E81 */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 228 33% 95%;
+    --secondary-foreground: 233 43% 12%;
+
+    --muted: 228 33% 95%;
+    --muted-foreground: 230 17% 35%;   /* ink muted #4A4E68 */
+
+    --accent: 240 90% 66%;             /* volt #5B5BF6 */
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 51%;          /* decline / risk #DC2626 */
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 230 30% 93%;             /* hairline #E6E8F2 */
+    --input: 230 30% 93%;
+    --ring: 240 90% 66%;               /* focus = volt */
+
+    --radius: 0.625rem;
+  }
+
+  * { @apply border-border; }
+  html, body, #root { height: 100%; }
+
+  body {
+    @apply bg-canvas text-ink font-sans antialiased;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .tabular,
+  [data-tabular] { font-variant-numeric: tabular-nums; }
+
+  h1, h2, h3, h4 {
+    @apply font-display text-ink tracking-tight-bank;
+    font-weight: 600;
+  }
+
+  ::selection { background-color: hsl(240 90% 66% / 0.18); color: hsl(233 43% 12%); }
+
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(230 16% 80%);
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover { background: hsl(230 16% 66%); background-clip: padding-box; border: 2px solid transparent; }
+}
+
+@layer utilities {
+  .divider-hairline {
+    background-image: linear-gradient(to right, transparent, hsl(230 20% 88%), transparent);
+    height: 1px;
+  }
+
+  .eyebrow {
+    @apply font-mono text-[10.5px] font-medium uppercase text-ink-subtle;
+    letter-spacing: 0.14em;
+  }
+
+  /* ── VyaPay signatures ───────────────────────────────────── */
+
+  /* Animated dashed routing rail — the "current" flowing between nodes */
+  .rail-current {
+    background-image: repeating-linear-gradient(
+      to right,
+      hsl(240 90% 66% / 0.9) 0,
+      hsl(240 90% 66% / 0.9) 6px,
+      transparent 6px,
+      transparent 12px
+    );
+    background-size: 24px 100%;
+    animation: rail-flow 0.8s linear infinite;
+  }
+
+  /* Faint circuit grid backdrop */
+  .circuit-grid {
+    background-image:
+      linear-gradient(to right, rgba(49, 46, 129, 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(49, 46, 129, 0.04) 1px, transparent 1px);
+    background-size: 30px 30px;
+  }
+
+  /* Volt rule — indigo→volt hairline crowning AI / spotlight cards */
+  .volt-rule {
+    background-image: linear-gradient(to right, #312E81, #5B5BF6 55%, transparent);
+    height: 2px;
+  }
+
+  /* Aurora wash — behind the AI flow while "thinking" */
+  .aurora-wash {
+    background:
+      radial-gradient(120% 80% at 12% 0%, hsl(240 90% 66% / 0.14), transparent 60%),
+      radial-gradient(120% 80% at 88% 10%, hsl(242 60% 50% / 0.10), transparent 60%);
+  }
+
+  .hero-aurora {
+    background-image:
+      radial-gradient(70% 130% at 0% 0%, hsl(240 90% 66% / 0.10), transparent 55%),
+      radial-gradient(60% 130% at 100% 0%, hsl(242 55% 45% / 0.07), transparent 55%);
+  }
+
+  /* Nav active highlight wash */
+  .nav-active-wash {
+    background: linear-gradient(to right, hsl(240 90% 66% / 0.12), hsl(240 90% 66% / 0.02) 80%, transparent);
+  }
+
+  /* Soft volt glow for AI pings */
+  .ring-volt-soft { box-shadow: 0 0 0 4px hsl(240 90% 66% / 0.14); }
+
+  .card-lift { transition: box-shadow 0.22s ease, transform 0.22s ease, border-color 0.22s ease; }
+  .card-lift:hover { transform: translateY(-2px); }
+
+  /* Thin volt rail that fades in on hover (KPI / feature cards) */
+  .top-rail::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 2px;
+    border-radius: 9999px;
+    background-image: linear-gradient(to right, #312E81, #5B5BF6 60%, transparent);
+    opacity: 0;
+    transition: opacity 0.22s ease;
+  }
+  .top-rail:hover::before { opacity: 1; }
+
+  /* Ticker fade masks on the live transaction strip */
+  .ticker-mask {
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+  }
+
+  /* ── Premium atmosphere ──────────────────────────────────── */
+
+  /* Fixed ambient wash behind the whole app — soft volt + indigo auroras give
+     the flat canvas depth so white cards float. */
+  .app-atmosphere {
+    background:
+      radial-gradient(52% 44% at 0% 0%, rgba(91, 91, 246, 0.10), transparent 60%),
+      radial-gradient(46% 40% at 100% 2%, rgba(49, 46, 129, 0.08), transparent 58%),
+      radial-gradient(60% 55% at 100% 100%, rgba(91, 91, 246, 0.05), transparent 62%);
+  }
+
+  /* Fine grain overlay — premium tactile texture, barely-there */
+  .app-grain {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.028;
+    mix-blend-mode: multiply;
+  }
+
+  /* Indigo→volt gradient text for brand marks + hero figures (used sparingly) */
+  .text-volt-gradient {
+    background: linear-gradient(118deg, #312E81 0%, #5B5BF6 72%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  /* Premium card surface — a whisper-soft vertical sheen + top hairline highlight
+     so cards read as lit-from-above glass, not flat fills. */
+  .surface {
+    background-image: linear-gradient(180deg, #FFFFFF 0%, #FCFCFE 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.9),
+      0 2px 4px rgba(17, 19, 43, 0.05),
+      0 10px 26px -8px rgba(17, 19, 43, 0.10);
+  }
+
+  /* Orchestrated page-load — staggered reveal of a container's direct children */
+  .reveal > * {
+    opacity: 0;
+    animation: fade-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .reveal > *:nth-child(1) { animation-delay: 0.02s; }
+  .reveal > *:nth-child(2) { animation-delay: 0.08s; }
+  .reveal > *:nth-child(3) { animation-delay: 0.14s; }
+  .reveal > *:nth-child(4) { animation-delay: 0.20s; }
+  .reveal > *:nth-child(5) { animation-delay: 0.26s; }
+  .reveal > *:nth-child(6) { animation-delay: 0.32s; }
+  .reveal > *:nth-child(7) { animation-delay: 0.38s; }
+  .reveal > *:nth-child(8) { animation-delay: 0.44s; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal > * { opacity: 1; animation: none; }
+  }
+}
