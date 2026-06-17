@@ -131,7 +131,11 @@ export function CopilotAudit() {
                       {msg.kind === 'audit' ? (
                         <DecisionAuditTrail trail={auditTrail} />
                       ) : msg.kind === 'report' ? (
-                        <ExecReportCard report={execReport} onExport={() => toast({ title: 'Report exported', description: `payments-report-${execReport.period.replace(/[^0-9]/g, '').slice(0, 8) || 'week'}.pdf`, tone: 'success' })} />
+                        <ExecReportCard
+                          report={execReport}
+                          onExport={() => toast({ title: 'Report exported', description: `payments-report-${execReport.period.replace(/[^0-9]/g, '').slice(0, 8) || 'week'}.pdf`, tone: 'success' })}
+                          onSchedule={() => toast({ title: 'Weekly report scheduled', description: 'Auto-delivered to leadership every Monday 08:00.', tone: 'info' })}
+                        />
                       ) : (
                         <div className="rounded-2xl rounded-tl-sm border border-hairline bg-card px-3.5 py-3 shadow-card-sm">
                           <p className="text-[13px] leading-relaxed text-ink">{msg.text}</p>

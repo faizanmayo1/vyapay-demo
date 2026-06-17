@@ -62,7 +62,7 @@ export function FraudDefense() {
                 </div>
               ))}
             </div>
-            <Button variant="secondary" size="sm" className="mt-3 w-full" onClick={() => toast({ title: 'Preventative actions queued', description: 'AI drafted outreach + evidence holds for the 2 highest-risk transactions.', tone: 'info' })}>
+            <Button variant="amber" size="sm" className="mt-3 w-full" onClick={() => toast({ title: 'Preventative actions queued', description: 'AI drafted outreach + evidence holds for the 2 highest-risk transactions.', tone: 'info' })}>
               Take preventative action
             </Button>
           </div>

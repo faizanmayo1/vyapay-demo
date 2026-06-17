@@ -5,7 +5,7 @@ import { cn } from '@/utils/cn'
 
 const dot: Record<string, string> = {
   positive: 'border-signal-positive bg-signal-positive',
-  info: 'border-volt bg-volt',
+  info: 'border-signal-info bg-signal-info',
   warning: 'border-signal-warning bg-signal-warning',
   risk: 'border-signal-risk bg-signal-risk',
   neutral: 'border-signal-neutral bg-signal-neutral',

@@ -5,7 +5,7 @@ import type { ExecReport } from '@/types/audit'
 import { cn } from '@/utils/cn'
 
 /** Leadership-grade weekly performance report artifact. */
-export function ExecReportCard({ report, onExport }: { report: ExecReport; onExport?: () => void }) {
+export function ExecReportCard({ report, onExport, onSchedule }: { report: ExecReport; onExport?: () => void; onSchedule?: () => void }) {
   return (
     <div className="relative overflow-hidden rounded-xl border border-amber/30 bg-card shadow-card-md">
       <div className="volt-rule" aria-hidden />
@@ -40,7 +40,7 @@ export function ExecReportCard({ report, onExport }: { report: ExecReport; onExp
 
         <div className="mt-4 flex flex-wrap items-center gap-2">
           <Button variant="amber" size="sm" onClick={onExport}><Download className="h-4 w-4" /> Export PDF</Button>
-          <Button variant="secondary" size="sm">Schedule weekly</Button>
+          <Button variant="secondary" size="sm" onClick={onSchedule}>Schedule weekly</Button>
         </div>
       </div>
     </div>

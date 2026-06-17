@@ -57,7 +57,11 @@ export function PolicyStudio() {
                 {['Network = Visa', 'Card type = debit', 'Issuer region = US'].map((c) => (
                   <span key={c} className="rounded-lg border border-hairline bg-canvas-subtle/60 px-2.5 py-1.5 font-mono text-[11.5px] text-ink">{c}</span>
                 ))}
-                <button type="button" className="inline-flex items-center gap-1 rounded-lg border border-dashed border-hairline-strong px-2.5 py-1.5 font-mono text-[11px] text-ink-subtle hover:border-volt/40 hover:text-volt-deep">
+                <button
+                  type="button"
+                  onClick={() => toast({ title: 'Add condition', description: 'Pick a field — BIN, amount, risk score, issuer country or merchant.', tone: 'info' })}
+                  className="inline-flex items-center gap-1 rounded-lg border border-dashed border-hairline-strong px-2.5 py-1.5 font-mono text-[11px] text-ink-subtle hover:border-volt/40 hover:text-volt-deep"
+                >
                   <Plus className="h-3 w-3" /> condition
                 </button>
               </div>
